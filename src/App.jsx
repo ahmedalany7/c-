@@ -5,6 +5,8 @@ import ListingCard from './components/ListingCard.jsx';
 import Filters from './components/Filters.jsx';
 import ListingModal from './components/ListingModal.jsx';
 import AddListing from './components/AddListing.jsx';
+import Support from './components/Support.jsx';
+import { SITE } from './config.js';
 
 const DEFAULT_FILTERS = { purpose: 'all', governorate: '', type: '', min: '', max: '', rooms: '0' };
 
@@ -14,7 +16,17 @@ export default function App() {
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
   const [query, setQuery] = useState('');
   const [sort, setSort] = useState('newest');
-  const [view, setView] = useState('all'); // all | favs | mine
+  const [view, setViewState] = useState(() => (location.hash === '#support' ? 'support' : 'all')); // all | favs | mine | support
+  const setView = (v) => {
+    setViewState(v);
+    history.replaceState(null, '', v === 'support' ? '#support' : location.pathname + location.search);
+    window.scrollTo({ top: 0 });
+  };
+  useEffect(() => {
+    const onHash = () => setViewState(location.hash === '#support' ? 'support' : 'all');
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
   const [selected, setSelected] = useState(null);
   const [adding, setAdding] = useState(false);
   const [toast, setToast] = useState('');
@@ -83,16 +95,18 @@ export default function App() {
     <>
       <header className="nav">
         <div className="container nav-inner">
-          <a className="logo" href="#">🏘️ عقارات <span>العراق</span></a>
+          <a className="logo" href="#" onClick={(e) => { e.preventDefault(); setView('all'); }}>🏘️ عقارات <span>العراق</span></a>
           <nav>
             <button className={view === 'all' ? 'active' : ''} onClick={() => setView('all')}>الإعلانات</button>
             <button className={view === 'favs' ? 'active' : ''} onClick={() => setView('favs')}>المفضلة ({favs.length})</button>
             <button className={view === 'mine' ? 'active' : ''} onClick={() => setView('mine')}>إعلاناتي</button>
+            <button className={view === 'support' ? 'active' : ''} onClick={() => setView('support')}>الدعم</button>
           </nav>
           <button className="btn primary" onClick={() => setAdding(true)}>+ أضف إعلان</button>
         </div>
       </header>
 
+      {view === 'support' ? <Support /> : (<>
       <section className="hero">
         <div className="container">
           <h1>ابحث عن عقارك في العراق</h1>
@@ -155,10 +169,15 @@ export default function App() {
           )}
         </section>
       </main>
+      </>)}
 
       <footer className="footer">
         <div className="container">
           <p>🏘️ عقارات العراق — منصة إعلانات عقارية مجانية</p>
+          <p className="footer-links">
+            <a href="#support" onClick={(e) => { e.preventDefault(); setView('support'); }}>الدعم والمساعدة</a>
+          </p>
+          <p className="muted">© {new Date().getFullYear()} {SITE.ownerAr} ({SITE.owner}). جميع الحقوق محفوظة.</p>
           <p className="muted">ملاحظة: تحويل الأسعار تقريبي (1$ ≈ 1,310 د.ع). تحقق دائماً من سند الملكية قبل الشراء.</p>
         </div>
       </footer>

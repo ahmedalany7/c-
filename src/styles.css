@@ -148,3 +148,28 @@ input:focus, select:focus, textarea:focus { border-color: var(--primary); }
   .spec-grid { grid-template-columns: repeat(2, 1fr); }
   .modal-cover { height: 200px; }
 }
+
+/* Support page */
+.hero.small { padding: 44px 0 36px; }
+.support-grid { display: grid; grid-template-columns: 1fr 340px; gap: 24px; margin: 32px auto 48px; align-items: start; }
+.panel { background: var(--card); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 12px; }
+.panel h2 { font-size: 1.25rem; }
+.side { display: flex; flex-direction: column; gap: 20px; }
+.faq { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.faq button { width: 100%; display: flex; justify-content: space-between; gap: 12px; padding: 12px 14px; background: none; border: 0; cursor: pointer; font-weight: 700; text-align: start; color: var(--text); }
+.faq.open { border-color: var(--primary); }
+.faq.open button { color: var(--primary); }
+.faq p { padding: 0 14px 14px; color: #4b5563; }
+.owner { text-align: center; align-items: center; gap: 6px; }
+.avatar { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #0f766e, #14b8a6); color: #fff; font-size: 2rem; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.contact-list { width: 100%; display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.contact-list a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; text-align: start; }
+.contact-list a:hover { border-color: var(--primary); }
+.contact-list span { font-size: 1.4rem; }
+.contact-list div { display: flex; flex-direction: column; }
+.contact-list small { color: var(--muted); text-align: start; }
+.note { color: var(--primary); font-weight: 600; font-size: 0.9rem; }
+.tips { grid-column: 1 / -1; }
+.tips ul { padding-inline-start: 20px; display: flex; flex-direction: column; gap: 6px; color: #4b5563; }
+.footer-links a { color: #5eead4; font-weight: 700; }
+@media (max-width: 900px) { .support-grid { grid-template-columns: 1fr; } }
