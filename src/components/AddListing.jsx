@@ -108,7 +108,7 @@ export default function AddListing({ onClose, onSubmit }) {
           {f.image && <img className="preview span2" src={f.image} alt="معاينة" />}
         </div>
         {error && <p className="error">{error}</p>}
-        <button className="btn primary full" type="submit">نشر الإعلان</button>
+        <button className="btn gold full shine" type="submit">نشر الإعلان</button>
       </form>
     </div>
   );

@@ -44,27 +44,29 @@ export default function Support() {
   return (
     <div className="support">
       <section className="hero small">
-        <div className="container">
+        <div className="blob b1" /><div className="blob b2" />
+        <div className="container hero-inner">
+          <span className="eyebrow">💬 الدعم الفني</span>
           <h1>مركز الدعم والمساعدة</h1>
           <p>نحن هنا لمساعدتك — فريق الدعم بإشراف <b>{SITE.ownerAr} ({SITE.owner})</b></p>
         </div>
       </section>
 
       <div className="container support-grid">
-        <section className="panel">
+        <section className="panel" data-reveal>
           <h2>الأسئلة الشائعة</h2>
           {FAQ.map(([q, a], i) => (
             <div key={q} className={`faq ${open === i ? 'open' : ''}`}>
               <button onClick={() => setOpen(open === i ? -1 : i)}>
                 <span>{q}</span><span>{open === i ? '−' : '+'}</span>
               </button>
-              {open === i && <p>{a}</p>}
+              <div className="faq-a"><p>{a}</p></div>
             </div>
           ))}
         </section>
 
         <div className="side">
-          <section className="panel owner">
+          <section className="panel owner" data-reveal>
             <div className="avatar">{SITE.ownerAr.charAt(0)}</div>
             <h3>{SITE.ownerAr}</h3>
             <p className="muted">{SITE.owner} — مؤسس ومدير الموقع</p>
@@ -81,7 +83,7 @@ export default function Support() {
             )}
           </section>
 
-          <form className="panel" onSubmit={send}>
+          <form className="panel" data-reveal onSubmit={send}>
             <h3>راسلنا</h3>
             <label>اسمك
               <input required value={msg.name} onChange={set('name')} />
@@ -97,12 +99,12 @@ export default function Support() {
             <label>رسالتك
               <textarea required rows="4" value={msg.text} onChange={set('text')} />
             </label>
-            <button className="btn primary full">إرسال</button>
+            <button className="btn gold full shine">إرسال</button>
             {note && <p className="note">{note}</p>}
           </form>
         </div>
 
-        <section className="panel tips">
+        <section className="panel tips" data-reveal>
           <h2>🛡️ نصائح للأمان قبل الشراء أو الإيجار</h2>
           <ul>{TIPS.map((t) => <li key={t}>{t}</li>)}</ul>
         </section>
